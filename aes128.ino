@@ -1,22 +1,21 @@
 #include <ESP8266WiFi.h>
 #include <ESP8266HTTPClient.h>
 #include <AESLib.h>
-#include <DHT.h>
-#include <base64.h> // Pastikan Anda memiliki library Base64
+#include <DHT.h> //bisa di sesuaikan dengan sensor yang lain
+#include <base64.h> 
 
 #define DHTPIN D1
 #define DHTTYPE DHT11
 
 DHT dht(DHTPIN, DHTTYPE);
 
-const char* ssid = "mn";
-const char* password ="manan1234";
-const char* server = "http://192.168.137.87:5000/upload";
-// const char* server = "http://192.168.43.21:5000/upload";
+const char* ssid = ""; //ssid wifi yang sama dengan server
+const char* password =""; // password
+const char* server = "http://192.168.137.87:5000/upload"; ///sesuaikan dengan alamat ip server
 AESLib aes;
 
-byte aes_key[16] = {'1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '1', '2', '3', '4', '5', '6'};
-byte aes_iv[16] = {0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F};
+byte aes_key[16] = {}; // bisa mengunakan seperti contoh ini {'1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '1', '2', '3', '4', '5', '6'}
+byte aes_iv[16] = {}; // bisa mengunakan contoh seperti ini {0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F}
 
 String encryptData(String data) {
   // Tambahkan padding
@@ -94,5 +93,5 @@ void loop() {
     Serial.println("Wi-Fi not connected!");
   }
 
-  delay(10000); // Delay sebelum pengulangan berikutnya
+  delay(10000); 
 }
